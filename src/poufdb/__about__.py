@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: MIT
 
-__version__ = "0.2.1a6"
+__version__ = "0.2.1a8"
 
 
 from importlib.metadata import metadata

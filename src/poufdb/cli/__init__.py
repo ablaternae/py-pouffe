@@ -18,14 +18,14 @@ from poufdb.http import server
     invoke_without_command=True,
     no_args_is_help=True,
 )
-@click.option("-r", "--start", is_flag=True, default=False, help="Server run")
+@click.option("-r", "--start", is_flag=True, default=False, help="API server run")
 @click.option(
     "-d",
     "--data-dir",
     # is_flag=True,
     default=options.DATA_DIR,
     type=click.Path(exists=False),
-    help=f"Data directory, default `{options.DATA_DIR}` (disable now)",
+    help=f"Data directory, default `{options.DATA_DIR}`",
 )
 @click.option(
     "-a",
