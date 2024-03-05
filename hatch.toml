@@ -1,0 +1,62 @@
+
+mode = "local"
+project = "poufdb"
+
+[shell]
+name = "pipenv"
+args = ["shell"]
+
+[dirs]
+data = ".hatch"
+cache = ".hatch/cache"
+python = ".venv/Scripts"
+
+[envs.default]
+type = "virtual"
+
+description = "hatch + pipenv = FTW!"
+detached = true
+dev-mode = true
+skip-install = false
+
+pre-install-commands = [
+"echo prepare...",
+"python -mpip -U pip pipenv",
+"pipenv install --dev hatchling hatch-requirements-txt setuptools build twine wheel black isprt mypy pylint",
+"echo end"
+]
+
+[envs.default.env-vars]
+
+HATCH_CONFIG = "./hatch.toml"
+HATCH_ENV_TYPE_VIRTUAL_PATH = ".venv"
+
+PIPENV_VENV_IN_PROJECT = "1"
+PIPENV_IGNORE_VIRTUALENVS = "1"	# to force pipenv to create its own virtualenv
+PIP_IGNORE_INSTALLED = "1" # pipenv ignore global installed
+
+[envs.default.scripts]
+init = "python -mpip install -U pip pipenv && pipenv install --dev hatchling setuptools build twine wheel hatch-requirements-txt"
+
+install = "pipenv install {args} & hatch run req-env"
+add = "pipenv install {args} & hatch run req-env"
+uninstall = "pipenv uninstall {args} & hatch run req-env"
+remove = "pipenv uninstall {args} & hatch run req-env"
+
+req = "pipenv -q requirements > requirements.txt && echo Ok"
+req-dev = "pipenv -q requirements --dev > requirements-dev.txt && echo Ok"
+req-env = "pipenv -q requirements {args} > requirements-{env_name}.txt && echo Ok"
+
+sync = "pipenv --quiet update && hatch run req-env"
+resync = "pip freeze > tmp.txt && pip uninstall -q -y -r tmp.txt & rm tmp.txt && pipenv -q install --dev && hatch run req-env"
+renew = "rm -i Pipfile.lock & hatch run resync"
+#renew = "rm -i Pipfile.lock & pipenv -q install --dev && hatch run req-env"
+
+[terminal.styles]
+info = "bold"
+success = "bold cyan"
+error = "bold red"
+warning = "bold yellow"
+waiting = "bold magenta"
+debug = "bold"
+spinner = "simpleDotsScrolling"
