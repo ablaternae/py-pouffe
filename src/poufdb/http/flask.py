@@ -21,14 +21,13 @@ app = Flask(__name__)
 async def index():
     return (
         {
-            name(): "Welcome!",
+            # name(): "Welcome!",
+            name(): summary(),
+            "uuid": id(),
             "version": version(),
             "python_version": sys.version,
-            "id": id(),
-            # "uuid": request.app.state.server_id.hex,
             "features": [],
-            "author": author(),
-            # "vendor": {"name": "Marten de Vries"},
+            "vendor": author(),
         },
         200,
     )
