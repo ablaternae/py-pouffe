@@ -92,7 +92,7 @@ def main(
         from ..http import server
 
         server.HTTP_PORT = options.HTTP_PORT
-        print('server.HTTP_PORT', server.HTTP_PORT)
+        print("server.HTTP_PORT", server.HTTP_PORT)
         print(__summary__)
         print("Server start...")
         print("Version", __version__)

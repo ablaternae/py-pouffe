@@ -6,6 +6,5 @@
 from . import const
 from . import flask as server
 
-
 __all__ = ("const", "server")
 # __all__ = ("app", "const", "server", "options")

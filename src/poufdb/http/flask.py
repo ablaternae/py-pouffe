@@ -6,12 +6,9 @@ import sys
 
 from flask import Flask
 
+# from .. import options
 from ..__about__ import *
 from ..options import APP_DEBUG, HTTP_HOST, HTTP_PORT
-from .. import options
-
-print('flask.options.HTTP_PORT', options.HTTP_PORT)
-print('HTTP_PORT', HTTP_PORT)
 
 app = Flask(__name__)
 # app.debug = True не работает, при перезагрузке падает процесс EOFError: Ran out of input
@@ -23,11 +20,12 @@ async def index():
         {
             # name(): "Welcome!",
             name(): summary(),
-            "uuid": id(),
+            "uuid": uuid(),
+            "id": id(),
             "version": version(),
             "python_version": sys.version,
             "features": [],
-            "vendor": author(),
+            "vendor": vendor(),
         },
         200,
     )
@@ -49,12 +47,12 @@ async def no_answer():
 @app.route("/<db>/")
 @app.route("/<db>/_all_docs")  #   select * limit MAX_UUIDS
 async def no_db(db=None):
-    return "DB Error {str(db)}, 405 Method Not Allowed", 405
+    return f"DB Error {str(db)}, 405 Method Not Allowed", 405
 
 
 @app.route("/{db}/_design/{field??}/_view/{view_name??}")
 async def not_found():
-    return "http error 406 Not Acceptable", 406
+    return f"http error 406 Not Acceptable", 406
 
 
 """
@@ -81,8 +79,7 @@ https://habr.com/ru/articles/101251/
 
 
 def start():
-    print('start options.HTTP_PORT', options.HTTP_PORT)
-    print('start HTTP_PORT', HTTP_PORT)
+    print("start HTTP_PORT", HTTP_PORT)
     # для мультипроцессинга нужна обертка в обычную функцию
     app.run(host=HTTP_HOST, port=HTTP_PORT, threaded=True)
 

@@ -7,10 +7,13 @@ from hashlib import sha256 as sha
 from os import linesep as CRLF
 from os.path import basename, dirname, realpath
 
+hash = lambda x: sha(str(x).encode("utf-8")).hexdigest()
+
 from environs import Env
 
 env = Env()
 env.read_env(override=True)
+
 
 WORK_DIR = os.getcwd()
 
