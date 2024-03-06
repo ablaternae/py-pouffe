@@ -14,5 +14,3 @@ SUCCESS = {"ok": True}
 SESSION = {"ok": True, "userCtx": {"name": None, "roles": ["_admin"]}}
 
 TOO_MANY_UUIDS = {"error": "bad_request", "reason": "count parameter too large"}
-
-MAX_UUIDS = 1000

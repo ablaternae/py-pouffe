@@ -6,10 +6,6 @@
 from . import const
 from . import flask as server
 
-# from server import app  # isort:skip
-
-# from .flask import app
-
 
 __all__ = ("const", "server")
 # __all__ = ("app", "const", "server", "options")
