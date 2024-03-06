@@ -41,9 +41,13 @@ async def no_answer():
 
 @app.route("/<db>/", methods=["POST"])  #   create
 # return {"ok":true,"id":"c6e2f3d7f8d0c91ce7938e9c0800131c","rev":"1-abadd48a09c270047658dbc38dc8a892"} # 32 символа sha1
+# couch даёт служебные поля с подчеркиванием _id _rev _deleted
 @app.route("/<db>/", methods=["GET"])  #   read
 @app.route("/<db>/", methods=["PUT"])  #   update / insert or update
 @app.route("/<db>/", methods=["DELETE"])  # delete / NB: mark as *delete*
+# как работает удаление https://habr.com/ru/articles/139325/
+
+
 @app.route("/<db>/")
 @app.route("/<db>/_all_docs")  #   select * limit MAX_UUIDS
 async def no_db(db=None):
