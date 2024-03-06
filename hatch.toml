@@ -52,6 +52,8 @@ resync = "pip freeze > tmp.txt && pip uninstall -q -y -r tmp.txt & rm tmp.txt &&
 renew = "rm -i Pipfile.lock & hatch run resync"
 #renew = "rm -i Pipfile.lock & pipenv -q install --dev && hatch run req-env"
 
+a = "hatch version alpha && git commit -am \"{args}\""
+
 [terminal.styles]
 info = "bold"
 success = "bold cyan"
