@@ -6,10 +6,11 @@ import sys
 
 from flask import Flask
 
-# from .. import options
+from .. import options
 from ..__about__ import *
-from ..options import APP_DEBUG, HTTP_HOST, HTTP_PORT
 
+# from ..options import APP_DEBUG, HTTP_HOST, HTTP_PORT
+print("flask options", options)
 app = Flask(__name__)
 # app.debug = True не работает, при перезагрузке падает процесс EOFError: Ran out of input
 
@@ -82,10 +83,15 @@ https://habr.com/ru/articles/101251/
 """
 
 
-def start():
-    print("start HTTP_PORT", HTTP_PORT)
+def start(host=None, port=None, **kwargs):
+    host = options.HTTP_HOST if host is None else host
+    port = options.HTTP_PORT if port is None else port
+    threaded = True
+
+    print("OPTIONS HTTP_PORT", port, host)
+    print("OPTIONS ", options)
     # для мультипроцессинга нужна обертка в обычную функцию
-    app.run(host=HTTP_HOST, port=HTTP_PORT, threaded=True)
+    app.run(host=host, port=port, threaded=threaded, **kwargs)
 
 
 __all__ = ("app", "start")

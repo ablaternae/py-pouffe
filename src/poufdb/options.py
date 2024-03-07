@@ -7,9 +7,9 @@ from hashlib import sha256 as sha
 from os import linesep as CRLF
 from os.path import basename, dirname, realpath
 
-hash = lambda x: sha(str(x).encode("utf-8")).hexdigest()
-
 from environs import Env
+
+from .__meta__ import Meta
 
 env = Env()
 env.read_env(override=True)
@@ -31,3 +31,11 @@ DATA_DIR = realpath(env.str("DATA_DIR", os.path.join(WORK_DIR, "_data")))
 ADMIN_PANEL = env.bool("ADMIN_PANEL", False)
 ADMIN_URL = ""
 ADMIN_PORT = "8084"
+
+
+hash = lambda x: sha(str(x).encode("utf-8")).hexdigest()
+hash10 = triphash = lambda x: hash(x)[:10]
+
+
+class Options(Meta):
+    pass

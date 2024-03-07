@@ -36,7 +36,7 @@ from poufdb.__about__ import *
 @click.option(
     "--host",
     # is_flag=True,
-    default=int(options.HTTP_PORT),
+    default=str(options.HTTP_HOST),
     type=str,
     help=f"Host, default `{options.HTTP_HOST}`",
 )
@@ -86,20 +86,22 @@ def main(
     if port:
         options.HTTP_PORT = int(port)
 
-    print(options.HTTP_PORT)
-
     if start:
         from ..http import server
 
-        server.HTTP_PORT = options.HTTP_PORT
-        print("server.HTTP_PORT", server.HTTP_PORT)
+        print("server HOST PORT", host, port)
+
         print(__summary__)
         print("Server start...")
         print("Version", __version__)
         print("Id", __id__)
 
         try:
-            proc = Process(target=server.start)
+            proc = Process(
+                target=server.start,
+                name="http_server",
+                kwargs=dict(host=host, port=port),
+            )
             proc.start()
             proc.join()
         except KeyboardInterrupt as exc:
