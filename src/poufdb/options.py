@@ -3,13 +3,20 @@
 # =============================================================================
 
 import os
+import sys
 from hashlib import sha256 as sha
 from os import linesep as CRLF
 from os.path import basename, dirname, realpath
 
-from environs import Env
-
 from .__meta__ import Meta
+
+try:
+    from tripcode import tripcode
+except:
+    pass
+
+
+from environs import Env
 
 env = Env()
 env.read_env(override=True)
@@ -35,6 +42,7 @@ ADMIN_PORT = "8084"
 
 hash = lambda x: sha(str(x).encode("utf-8")).hexdigest()
 hash10 = triphash = lambda x: hash(x)[:10]
+tripcode = tripcode if "tripcode" in sys.modules else hash10
 
 
 class Options(Meta):
