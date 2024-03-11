@@ -18,6 +18,31 @@ PoufDB is based on [ChairDB source code](https://github.com/marten-de-vries/chai
 ```console
 pip install poufdb
 ```
+```console
+git clone --depth=1 https://github.com/ablaternae/py-pouffe .
+pip install --upgrade .
+```
+
+## Run
+```console
+> poufdb.exe --help
+Usage: poufdb [OPTIONS] COMMAND [ARGS]...
+
+  PoufDB (aka Pouffe) provides scripts for create & serve rest api similar to
+  CouchDB but for sql-like db on backend
+
+Options:
+  -r, --start                     API REST Server run
+  -d, --data-dir PATH             Data directory, default `%current_dir%/_data`
+  -a, --admin-panel               Start discrete server for admin panel
+                                  (disable now)
+  --host TEXT                     Host, default `0.0.0.0`
+  --port INTEGER                  Port, default `5984`
+  --engine [sqlite|inmemory|csv]  Backend engine (disable now)
+  -v, --version                   Show the version and exit
+  -h, --help                      Show this message and exit
+```
+
 
 ## License
 

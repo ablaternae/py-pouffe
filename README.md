@@ -6,20 +6,33 @@ _Замечание по именованию: pouf (aka pouffe) это пуф, 
 
 -----
 
-код буквально сейчас находится в разработке, все замечания и предложения шлите пул-реквестами
-
-
 ## Установка и запуск
 
 ```console
-git clone --depth=1 http://%репозиторий% .
+git clone --depth=1 https://github.com/ablaternae/py-pouffe .
 pip install --upgrade .
-
-poufdb
 ```
-* `poufdb --start` запускает API сервер
-* `poufdb --admin-panel` отдельный веб-сервер панели администрирования локального сервера бд
-* `poufdb --help` остальные опции, список пополняется
+```console
+> poufdb.exe --help
+Usage: poufdb [OPTIONS] COMMAND [ARGS]...
+
+  PoufDB (aka Pouffe) provides scripts for create & serve rest api similar to
+  CouchDB but for sql-like db on backend
+
+Options:
+  -r, --start                     API REST Server run
+  -d, --data-dir PATH             Data directory, default `%current_dir%/_data`
+  -a, --admin-panel               Start discrete server for admin panel
+                                  (disable now)
+  --host TEXT                     Host, default `0.0.0.0`
+  --port INTEGER                  Port, default `5984`
+  --engine [sqlite|inmemory|csv]  Backend engine (disable now)
+  -v, --version                   Show the version and exit
+  -h, --help                      Show this message and exit
+```
+
+
+код буквально сейчас находится в разработке, все замечания и предложения шлите пул-реквестами
 
 
 ## License

@@ -11,12 +11,14 @@ import click
 from poufdb import options
 from poufdb.__about__ import *
 
+print('INIT CLI')
+
 
 @click.group(
     context_settings={"help_option_names": ["-h", "--help"]},
     invoke_without_command=True,
     no_args_is_help=True,
-    # help="Show this message and exit",
+    help=__summary__,
 )
 @click.option("-r", "--start", is_flag=True, default=False, help="API REST Server run")
 @click.option(
@@ -91,7 +93,7 @@ def main(
 
         print("server HOST PORT", host, port)
 
-        print(__summary__)
+        # print(__summary__)
         print("Server start...")
         print("Version", __version__)
         print("Id", __id__)

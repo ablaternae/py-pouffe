@@ -3,13 +3,13 @@
 # =============================================================================
 
 
-__version__ = "0.2.4a18"
+__version__ = "0.2.5a4"
 
 
 from importlib.metadata import metadata
 from uuid import uuid1
 
-from .options import hash
+from .__options__ import hash
 
 meta = metadata(__name__.split(".")[0]).json
 # здесь хак: name должно быть имя пакета, а не модуля
