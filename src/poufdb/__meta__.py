@@ -76,7 +76,7 @@ class Meta(dict):
         return self
 
     def get_namespace(
-        self, namespace: str, lowercase: bool = True, trim_namespace: bool = True
+        self, namespace: str, lowercase: bool = False, trim_namespace: bool = True
     ) -> dict[str, Any]:
         """Returns a dictionary containing a subset of configuration options
         that match the specified namespace/prefix. Example usage::
@@ -105,7 +105,8 @@ class Meta(dict):
 
         .. versionadded:: 0.11
         """
-        rv = {}
+        # rv = {}
+        rv = type(self)()
         for k, v in self.items():
             if not k.startswith(namespace):
                 continue
