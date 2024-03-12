@@ -16,9 +16,6 @@ pip install --upgrade .
 > poufdb.exe --help
 Usage: poufdb [OPTIONS] COMMAND [ARGS]...
 
-  PoufDB (aka Pouffe) provides scripts for create & serve rest api similar to
-  CouchDB but for sql-like db on backend
-
 Options:
   -r, --start                     API REST Server run
   -d, --data-dir PATH             Data directory, default `%current_dir%/_data`

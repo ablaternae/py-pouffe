@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "poufdb"
 dynamic = ["version","dependencies"]
 description = "PoufDB (aka Pouffe) provides scripts for create & serve rest api similar to CouchDB but for sql-like db on backend"
-readme = "README.pypi.md"
+readme = "README.en.md"
 requires-python = ">=3.8"
 license = "Apache-2.0"
 license-files = { globs = ["LICENSES/*"] }
