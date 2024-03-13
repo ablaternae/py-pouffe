@@ -4,15 +4,16 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+environs = "*"
 # cli ui
 click = "*"
 # Sorted Containers is an Apache2 licensed sorted collections library, written in pure-Python, and fast as C-extensions.
 sortedcontainers = "*"
 # iterative JSON parser with standard Python iterator interfaces
 ijson = "*"
-# strictyaml = "*"
-environs = "*"
+# async flask
 flask = {extras = ["async"], version = "*"}
+# APSW glues together the complete SQLite C API and Python's C API
 apsw = "*"
 
 [dev-packages]
