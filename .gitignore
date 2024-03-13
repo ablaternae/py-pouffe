@@ -9,6 +9,8 @@
 **/.deta
 .space
 
+### project specific
+_data
 .hatch
 *token*
 *.github_token
