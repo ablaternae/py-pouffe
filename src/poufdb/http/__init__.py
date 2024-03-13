@@ -3,12 +3,13 @@
 #
 
 
-from .. import options
+# from ..options import defaults
+from .. import defaults
 from . import const
 
-HTTP = options.get_namespace("HTTP_", lowercase=1)
+HTTP = defaults.get_namespace("HTTP_", lowercase=1)
 
-print(HTTP)
+# print(HTTP)
 
 if HTTP.driver == HTTP.driver_flask:
     from . import flask as server

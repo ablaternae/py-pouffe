@@ -89,8 +89,6 @@ def main(
     if start:
         from ..http import server
 
-        print("server HOST PORT", host, port)
-
         # print(__summary__)
         print("Server start...")
         print("Version", __version__)

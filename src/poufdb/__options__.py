@@ -2,8 +2,12 @@
 #
 # =============================================================================
 
+
 import os
+
+# from hashlib import sha1 as sha #   sha1 faster sha256 apprx 1/3
 from hashlib import sha256 as sha
+
 from os.path import basename, dirname, realpath
 
 from .__meta__ import Meta

@@ -3,7 +3,7 @@
 # =============================================================================
 
 
-from . import __options__ as o
+from . import __options__ as options
 from .__about__ import *
 from .__meta__ import Meta
 from .__options__ import Options
@@ -12,11 +12,10 @@ from .__options__ import Options
 # from .http import server as http_server
 
 try:
-    tmp = o.options
+    defaults = options.defaults
     # options
 except (AttributeError, NameError) as exc:
-    options = o.Options().from_object(o)
-    # sys.modules['poufdb.__options__'].options = options
+    defaults = Options().from_object(options)
 
 
-__all__ = ("Meta", "options")
+__all__ = ("Meta", "Options", "options", "defaults")

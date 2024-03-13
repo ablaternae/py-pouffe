@@ -40,12 +40,10 @@ import sys
 
 from flask import Flask
 
-from .. import options
+# from ..options import defaults
+from .. import defaults
 from ..__about__ import *
 
-# from ..options import APP_DEBUG, HTTP_HOST, HTTP_PORT
-# print("flask options", options)
-# print(" FLASK GOGO")
 
 app = Flask(__name__)
 # app.debug = True не работает, при перезагрузке падает процесс EOFError: Ran out of input
@@ -120,13 +118,16 @@ https://habr.com/ru/articles/101251/
 
 
 def start(host=None, port=None, **kwargs):
-    host = options.HTTP_HOST if host is None else host
-    port = options.HTTP_PORT if port is None else port
+    """ для мультипроцессинга нужна обертка в обычную функцию
+    """
+
+    host = defaults.HTTP_HOST if host is None else host
+    port = defaults.HTTP_PORT if port is None else port
     threaded = True
 
-    print("OPTIONS HTTP_PORT", port, host)
-    print("OPTIONS ", options)
-    # для мультипроцессинга нужна обертка в обычную функцию
+    # print("OPTIONS HTTP_PORT", port, host)
+    # print("OPTIONS ", defaults)
+
     app.run(host=host, port=port, threaded=threaded, **kwargs)
 
 
