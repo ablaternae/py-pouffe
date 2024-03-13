@@ -8,10 +8,8 @@ from multiprocessing import Process
 
 import click
 
-from poufdb import options
-from poufdb.__about__ import *
-
-print('INIT CLI')
+from .. import options
+from ..__about__ import *
 
 
 @click.group(
@@ -20,14 +18,14 @@ print('INIT CLI')
     no_args_is_help=True,
     help=__summary__,
 )
-@click.option("-r", "--start", is_flag=True, default=False, help="API REST Server run")
+@click.option("-r", "--start", is_flag=True, default=False, help="Server run")
 @click.option(
     "-d",
     "--data-dir",
     # is_flag=True,
-    default=options.DATA_DIR,
+    default=options.STORAGE_DATA_DIR,
     type=click.Path(exists=False),
-    help=f"Data directory, default `{options.DATA_DIR}`",
+    help=f"Data directory, default `{options.STORAGE_DATA_DIR}`",
 )
 @click.option(
     "-a",
@@ -71,11 +69,11 @@ def main(
 ):
 
     if admin_panel:
-        options.ADMIN_PANEL = admin_panel
+        options.HTTP_ADMIN_PANEL = admin_panel
 
     if data_dir:
         data_dir = os.path.realpath(data_dir)
-        options.DATA_DIR = data_dir
+        options.STORAGE_DATA_DIR = data_dir
         if not os.path.isdir(data_dir):
             try:
                 os.mkdir(data_dir, 0o755)
@@ -101,14 +99,14 @@ def main(
         try:
             proc = Process(
                 target=server.start,
-                name="http_server",
+                name="process_http_server",
                 kwargs=dict(host=host, port=port),
             )
             proc.start()
             proc.join()
         except KeyboardInterrupt as exc:
-            print("KeyboardInterrupt detected")
+            print("Keyboard Interrupt detected")
 
         print("Server stop")
 
-    # print(admin_panel, data_dir, 755, 0x755, 0o755)
+    return
