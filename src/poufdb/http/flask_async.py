@@ -44,7 +44,6 @@ from flask import Flask
 from .. import defaults
 from ..__about__ import *
 
-
 app = Flask(__name__)
 # app.debug = True не работает, при перезагрузке падает процесс EOFError: Ran out of input
 
@@ -118,8 +117,7 @@ https://habr.com/ru/articles/101251/
 
 
 def start(host=None, port=None, **kwargs):
-    """ для мультипроцессинга нужна обертка в обычную функцию
-    """
+    """для мультипроцессинга нужна обертка в обычную функцию"""
 
     host = defaults.HTTP_HOST if host is None else host
     port = defaults.HTTP_PORT if port is None else port

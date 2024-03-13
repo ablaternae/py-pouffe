@@ -3,19 +3,18 @@
 # =============================================================================
 
 
-from . import __options__ as options
+from . import options
 from .__about__ import *
-from .__meta__ import Meta
-from .__options__ import Options
 
 # from .http import *
 # from .http import server as http_server
+# from .storage import info
 
 try:
     defaults = options.defaults
     # options
 except (AttributeError, NameError) as exc:
-    defaults = Options().from_object(options)
+    defaults = options.Options().from_object(options)
 
 
-__all__ = ("Meta", "Options", "options", "defaults")
+# __all__ = ("Meta", "Options", "defaults")

@@ -9,13 +9,12 @@ import os
 # sha1 is faster than sha256 apprx 1/3 and just shorter
 from hashlib import sha1 as sha
 
+from os.path import basename, dirname, realpath
 from .meta import Meta
-
-# from os.path import basename, dirname, realpath
 
 try:
     from tripcode import tripcode
-except ImportError:
+except:
     pass
 
 
@@ -25,13 +24,12 @@ env = Env()
 env.read_env(override=True)
 
 
-CRLF = os.linesep
 WORK_DIR = os.getcwd()
+CRLF = os.linesep
 
 
 APP_ENV = env.str("APP_ENV", "dev")
 APP_DEBUG = env.bool("APP_DEBUG", False)
-APP_SALT = env.str("APP_SALT", "^__^")
 
 HTTP_HOST = env.str("HTTP_HOST", "127.0.0.1")
 HTTP_HOST = env.str("HTTP_HOST", "0.0.0.0")
@@ -48,17 +46,11 @@ HTTP_ADMIN_PORT = "8084"
 HTTP_ADMIN_URL = ""
 
 
-STORAGE_DATA_DIR = os.path.realpath(
-    env.str("DATA_DIR", os.path.join(WORK_DIR, "_data"))
-)
+STORAGE_DATA_DIR = realpath(env.str("DATA_DIR", os.path.join(WORK_DIR, "_data")))
 STORAGE_DRIVER_SQLITE = "sqlite"
-STORAGE_DRIVER_SQLITE_ADVANCED = "sqlite_adv"
-STORAGE_DRIVER = STORAGE_DRIVER_SQLITE_ADVANCED
+STORAGE_DRIVER_SQLITE_ASYNC = "sqlite_async"
 
-STORAGE_JSON_AS_BLOB = "json_blob"
-STORAGE_JSON_AS_JSON = "json_special"
-STORAGE_JSON_AS_STRING = "json_string"
-STORAGE_JSON_FORMAT = STORAGE_JSON_AS_BLOB
+STORAGE_DRIVER = STORAGE_DRIVER_SQLITE_ASYNC
 
 
 hash = lambda x: sha(str(x).encode("utf-8")).hexdigest()
@@ -69,3 +61,14 @@ if not "tripcode" in locals():
 
 class Options(Meta):
     pass
+
+
+# class Options(Meta):
+#    __singleton__: bool = False
+#
+#    def __init__(self, *args, **kwargs):
+#        print('SINGLETON', type(self), type(self).__singleton__)
+#
+#        if not type(self).__singleton__:
+#            super().__init__(*args, **kwargs)
+#            type(self).__singleton__ = True

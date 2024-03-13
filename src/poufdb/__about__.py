@@ -3,17 +3,16 @@
 # =============================================================================
 
 
-__version__ = "0.2.5a12"
+__version__ = "0.2.5a15"
 
 
 from importlib.metadata import metadata
 from uuid import uuid1
 
-from .__options__ import hash
+from .options import hash
 
 meta = metadata(__name__.split(".")[0]).json
 # здесь хак: name должно быть имя пакета, а не модуля
-
 
 __author__ = meta["author_email"] or ""
 __license__ = meta["license_expression"] or ""
@@ -26,40 +25,15 @@ __uuid__ = str(uuid1())
 __id__ = hash(f"{__vendor__}:{__uuid__}")
 
 
-def id():
-    return __id__
-
-
-def uuid():
-    return __uuid__
-
-
-def vendor():
-    return __vendor__
-
-
-def name():
-    return meta["name"]
-
-
-def author():
-    return __author__
-
-
-def version():
-    return __version__
-
-
-def license():
-    return __license__
-
-
-def summary():
-    return __summary__
-
-
-def description():
-    return __description__
+id = lambda: __id__
+uuid = lambda: __uuid__
+vendor = lambda: __vendor__
+name = lambda: meta["name"]
+author = lambda: __author__
+version = lambda: __version__
+license = lambda: __license__
+summary = lambda: __summary__
+description = lambda: __description__
 
 
 __all__ = (
