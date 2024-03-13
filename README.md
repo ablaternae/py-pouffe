@@ -9,15 +9,15 @@ _Замечание по именованию: pouf (aka pouffe) это пуф, 
 ## Установка и запуск
 
 ```console
-git clone --depth=1 https://github.com/ablaternae/py-pouffe .
-pip install --upgrade .
+> git clone --depth=1 https://github.com/ablaternae/py-pouffe .
+> pip install --upgrade .
 ```
 ```console
-> poufdb.exe --help
+> poufdb --help
 Usage: poufdb [OPTIONS] COMMAND [ARGS]...
 
 Options:
-  -r, --start                     API REST Server run
+  -r, --start                     Server run
   -d, --data-dir PATH             Data directory, default `%current_dir%/_data`
   -a, --admin-panel               Start discrete server for admin panel
                                   (disable now)
