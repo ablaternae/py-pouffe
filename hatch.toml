@@ -53,6 +53,7 @@ renew = "rm -i Pipfile.lock & hatch run resync"
 #renew = "rm -i Pipfile.lock & pipenv -q install --dev && hatch run req-env"
 
 a = "hatch version alpha && git commit -am \"{args}\""
+v = "hatch version alpha && isort src && black src/**/*.py"
 
 [terminal.styles]
 info = "bold"
