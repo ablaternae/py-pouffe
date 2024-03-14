@@ -3,7 +3,7 @@
 # =============================================================================
 
 
-__version__ = "0.2.5a15"
+__version__ = "0.2.5a24"
 
 
 from importlib.metadata import metadata
@@ -38,11 +38,8 @@ description = lambda: __description__
 
 __all__ = (
     "__id__",
-    # "__name__",
     "__author__",
     "__version__",
-    "__license__",
-    "__summary__",
     "id",
     "uuid",
     "name",

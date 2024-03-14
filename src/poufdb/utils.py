@@ -1,22 +1,61 @@
 # =============================================================================
 #
+# что не поместилось в модули, но и не требует отдельных пакетов
+#
 # =============================================================================
 
 
-from pprint import pformat
+import errno
+import os
+from types import ModuleType
 from typing import Any, Mapping
 
-# from dataclasses import dataclass
-from sortedcontainers import SortedDict
+# from sortedcontainers import SortedDict
 
 
-# @dataclass
 # class Meta(SortedDict):
 class Meta(dict):
     # methods from flask.config
 
+    def from_pyfile(
+        self, filename: str | os.PathLike[str], silent: bool = False
+    ) -> Any:
+        """
+        Updates the values in the config from a Python file.  This function
+        behaves as if the file was imported as module with the
+        :meth:`from_object` function.
+
+        :param filename: the filename of the config.  This can either be an
+                         absolute filename or a filename relative to the
+                         root path.
+        :param silent: set to ``True`` if you want silent failure for missing
+                       files.
+        :return: ``True`` if the file was loaded successfully.
+
+        .. versionadded:: 0.7
+           `silent` parameter.
+        """
+        # filename = os.path.join(self.root_path, filename)
+        # d = types.ModuleType("config")
+        # d.__file__ = filename
+        filename = os.path.join(os.path.realpath(os.path.dirname(__file__)), filename)
+        print(filename)
+        d = dict()
+        try:
+            with open(filename, mode="rb") as config_file:
+                exec(compile(config_file.read(), filename, "exec"), d)
+                # exec(compile(config_file.read(), filename, "exec"), d.__dict__)
+        except OSError as e:
+            if silent and e.errno in (errno.ENOENT, errno.EISDIR, errno.ENOTDIR):
+                return False
+            e.strerror = f"Unable to load configuration file ({e.strerror})"
+            raise
+        self.from_object(d)
+        return self
+
     def from_object(self, obj: object | str) -> None:
-        """Updates the values from the given object.  An object can be of one
+        """
+        Updates the values from the given object.  An object can be of one
         of the following two types:
 
         -   a string: in this case the object with that name will be imported
@@ -76,7 +115,10 @@ class Meta(dict):
         return self
 
     def get_namespace(
-        self, namespace: str, lowercase: bool = False, trim_namespace: bool = True
+        self,
+        namespace: str,
+        lowercase: bool = False,
+        trim_namespace: bool = True,
     ) -> dict[str, Any]:
         """Returns a dictionary containing a subset of configuration options
         that match the specified namespace/prefix. Example usage::
@@ -137,4 +179,8 @@ class Meta(dict):
     pass
 
 
-__all__ = ("Meta",)
+class Config(Meta):
+    pass
+
+
+__all__ = ("Meta", "Config")

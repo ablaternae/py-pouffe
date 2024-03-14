@@ -8,9 +8,7 @@ import os
 # from hashlib import sha256 as sha
 # sha1 is faster than sha256 apprx 1/3 and just shorter
 from hashlib import sha1 as sha
-
 from os.path import basename, dirname, realpath
-from .meta import Meta
 
 try:
     from tripcode import tripcode
@@ -57,18 +55,3 @@ hash = lambda x: sha(str(x).encode("utf-8")).hexdigest()
 hash10 = triphash = lambda x: hash(x)[:10]
 if not "tripcode" in locals():
     tripcode = hash10
-
-
-class Options(Meta):
-    pass
-
-
-# class Options(Meta):
-#    __singleton__: bool = False
-#
-#    def __init__(self, *args, **kwargs):
-#        print('SINGLETON', type(self), type(self).__singleton__)
-#
-#        if not type(self).__singleton__:
-#            super().__init__(*args, **kwargs)
-#            type(self).__singleton__ = True

@@ -16,7 +16,7 @@ from ..__about__ import *
     context_settings={"help_option_names": ["-h", "--help"]},
     invoke_without_command=True,
     no_args_is_help=True,
-    help=__summary__,
+    help=summary(),
 )
 @click.option("-r", "--start", is_flag=True, default=False, help="Server run")
 @click.option(
@@ -65,9 +65,13 @@ from ..__about__ import *
     prog_name="PoufDB",
 )
 def main(
-    admin_panel=None, data_dir=None, host=None, port=None, start=None, engine=None
+    admin_panel=None,
+    data_dir=None,
+    host=None,
+    port=None,
+    start=None,
+    engine=None,
 ):
-
     if admin_panel:
         options.HTTP_ADMIN_PANEL = admin_panel
 
@@ -89,7 +93,7 @@ def main(
     if start:
         from ..http import server
 
-        # print(__summary__)
+        # print(summary())
         print("Server start...")
         print("Version", __version__)
         print("Id", __id__)

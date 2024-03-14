@@ -3,9 +3,9 @@
 # =============================================================================
 
 
-from . import options, utils
-from . import information_schema as info
 from .. import defaults
+from . import information_schema as info
+from . import options, utils
 
 print(defaults)
 
