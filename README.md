@@ -34,6 +34,6 @@ Options:
 
 ## License
 
-`poufdb` распространяется под лицензией [Apache 2](https://spdx.org/licenses/Apache-2.0.html),
+`poufdb` распространяется по лицензии [Apache 2](https://spdx.org/licenses/Apache-2.0.html),
 которая, возможно, будет изменена для коммерческого использования. Использование в академических
 целях (для обучения) бесплатное.
