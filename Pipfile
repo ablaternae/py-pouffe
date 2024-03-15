@@ -9,29 +9,23 @@ environs = "*"
 click = "*"
 # Sorted Containers is an Apache2 licensed sorted collections library, written in pure-Python, and fast as C-extensions.
 sortedcontainers = "*"
-# iterative JSON parser with standard Python iterator interfaces
-ijson = "*"
 # async flask
 flask = {extras = ["async"], version = "*"}
+peewee = "*"
 # APSW glues together the complete SQLite C API and Python's C API
 apsw = "*"
+ujson = "*"
 
 [dev-packages]
 hatchling = "*"
 setuptools = "*"
 build = "*"
 hatch-requirements-txt = "*"
-cibuildwheel = "*"
-flask = "*"
-peewee = "*"
-# chairdb req
-anyio = "*" 
-httpx = "*"
-sortedcontainers = "*"
+#
+msgpack = "*"
 ijson = "*"
-starlette = "*"
-aiosqlite = "*"
-aiofiles = "*"
+munch = "*"
+serializable = "*"
 poufdb = {file = ".", editable = true}
 
 [requires]
