@@ -8,7 +8,6 @@ import os
 # from hashlib import sha256 as sha
 # sha1 is faster than sha256 apprx 1/3 and just shorter
 from hashlib import sha1 as sha
-from os.path import basename, dirname, realpath
 
 try:
     from tripcode import tripcode
@@ -44,14 +43,17 @@ HTTP_ADMIN_PORT = "8084"
 HTTP_ADMIN_URL = ""
 
 
-STORAGE_DATA_DIR = realpath(env.str("DATA_DIR", os.path.join(WORK_DIR, "_data")))
+STORAGE_DATA_DIR = os.path.realpath(
+    env.str("DATA_DIR", os.path.join(WORK_DIR, "_data"))
+)
 STORAGE_DRIVER_SQLITE = "sqlite"
 STORAGE_DRIVER_SQLITE_ASYNC = "sqlite_async"
+STORAGE_DRIVER_SQLITE_ADVANCED = "sqlite_adv"
 
-STORAGE_DRIVER = STORAGE_DRIVER_SQLITE_ASYNC
+STORAGE_DRIVER = STORAGE_DRIVER_SQLITE_ADVANCED
 
 
 hash = lambda x: sha(str(x).encode("utf-8")).hexdigest()
 hash10 = triphash = lambda x: hash(x)[:10]
-if not "tripcode" in locals():
+if not "tripcode" in globals():
     tripcode = hash10

@@ -2,18 +2,16 @@
 #
 # =============================================================================
 
-from playhouse.apsw_ext import *
-
-Database = APSWDatabase
+from base_model import BaseModel, DataBase
 
 
-class BaseModel(Model):
-    class Meta:
-        database = database
+def db(dbname: str) -> dict:
+    #
 
+    def create():
+        return 111
 
-from ..meta import Meta
+    pass
 
-print(Meta().from_mapping(locals()))
 
 __all__ = ("Database", "Model", "BaseModel")

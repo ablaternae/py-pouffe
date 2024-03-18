@@ -2,4 +2,4 @@
 #
 # =============================================================================
 
-from peewee import Peewee
+from peewee import SqliteDatabase

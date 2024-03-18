@@ -40,9 +40,11 @@ import sys
 
 from flask import Flask
 
-# from ..options import defaults
-from .. import defaults
 from ..__about__ import *
+
+# from .. import config
+# from .const import HTTP
+
 
 app = Flask(__name__)
 # app.debug = True не работает, при перезагрузке падает процесс EOFError: Ran out of input
@@ -60,6 +62,7 @@ async def index():
             "python_version": sys.version,
             "features": [],
             "vendor": vendor(),
+            # "author": author(),
         },
         200,
     )
@@ -85,6 +88,10 @@ async def no_answer():
 @app.route("/<db>/")
 @app.route("/<db>/_all_docs")  #   select * limit MAX_UUIDS
 async def no_db(db=None):
+    from ..storage import engine
+
+    print(engine.db.create())
+
     return f"DB Error {str(db)}, 405 Method Not Allowed", 405
 
 
@@ -119,12 +126,12 @@ https://habr.com/ru/articles/101251/
 def start(host=None, port=None, **kwargs):
     """для мультипроцессинга нужна обертка в обычную функцию"""
 
-    host = defaults.HTTP_HOST if host is None else host
-    port = defaults.HTTP_PORT if port is None else port
+    host = config.HTTP_HOST if host is None else host
+    port = config.HTTP_PORT if port is None else port
     threaded = True
 
     # print("OPTIONS HTTP_PORT", port, host)
-    # print("OPTIONS ", defaults)
+    # print("OPTIONS ", config)
 
     app.run(host=host, port=port, threaded=threaded, **kwargs)
 

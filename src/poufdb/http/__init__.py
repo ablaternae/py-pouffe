@@ -1,21 +1,39 @@
+# =============================================================================
 #
-#
-#
+# =============================================================================
 
 
-# from ..options import defaults
-from .. import defaults
-from . import const
+from types import ModuleType
 
-HTTP = defaults.get_namespace("HTTP_", lowercase=1)
+import information_schema
 
-# print(HTTP)
+from . import const, flask, flask_async
 
-if HTTP.driver == HTTP.driver_flask:
-    from . import flask as server
+# from .const import *
 
-if HTTP.driver == HTTP.driver_flask_async:
-    from . import flask_async as server
 
-__all__ = ("const", "server")
+HTTP = information_schema.to_object("HTTP_", lowercase=1)
+HTTP.CONST = const
+
+
+server = ModuleType(__name__ + ".server")
+
+# print('HTTP ==', HTTP)
+
+
+def get_server(kind=HTTP.driver) -> ModuleType:
+    #
+
+    if kind == HTTP.driver_flask:
+        server = flask
+
+    if kind == HTTP.driver_flask_async:
+        server = flask_async
+
+    return server
+
+
+server = get_server()
+
+__all__ = ("const", "server", "HTTP", "get_server")
 # __all__ = ("app", "const", "server", "options")

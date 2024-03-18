@@ -10,6 +10,7 @@ import click
 
 from .. import options
 from ..__about__ import *
+from ..http import server
 
 
 @click.group(
@@ -77,7 +78,7 @@ def main(
 
     if data_dir:
         data_dir = os.path.realpath(data_dir)
-        options.STORAGE_DATA_DIR = data_dir
+        # options.STORAGE_DATA_DIR = data_dir
         if not os.path.isdir(data_dir):
             try:
                 os.mkdir(data_dir, 0o755)
@@ -91,8 +92,6 @@ def main(
         options.HTTP_PORT = int(port)
 
     if start:
-        from ..http import server
-
         # print(summary())
         print("Server start...")
         print("Version", __version__)
