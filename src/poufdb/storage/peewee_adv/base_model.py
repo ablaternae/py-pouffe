@@ -2,6 +2,8 @@
 #
 # =============================================================================
 
+
+from datetime import datetime
 from types import Any, Dict, List, Union
 
 from playhouse.apsw_ext import (
@@ -21,7 +23,7 @@ from playhouse.apsw_ext import (
 from playhouse.hybrid import hybrid_method, hybrid_property
 from playhouse.sqlite_ext import JSONField
 
-from poufdb.options import tripcode
+from poufdb.options import tripcode as hash
 
 Database = APSWDatabase
 RealField = FloatField
@@ -59,6 +61,7 @@ class BaseModel(Model):
     # сделать ссылку на таблицу IntegerField(att_id) -> _attachments(id, blob)
 
     _timestamp = FloatField(index=True, null=False, unique=False)
+    # добавленное поле
 
     # calculated cells #
 
@@ -92,7 +95,27 @@ class BaseModel(Model):
         # database = database
         only_save_dirty = True
 
-        hash = tripcode
+        hash = hash
+
+        pass
+
+    def save(self, *args, **kwargs):
+        # this is a create operation, set the date_created field
+        # if self._get_pk_value() is None:
+        #    self.date_created = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+        #        print(
+        #            self,
+        #            self.id,
+        #            self.get_id(),
+        #            not self.id,
+        #            self.create_time,
+        # [e for e in self.select().dicts()],
+        #        )
+
+        self._timestamp = datetime.now()
+
+        return super().save(*args, **kwargs)
 
     pass
 
