@@ -3,20 +3,38 @@
 # =============================================================================
 
 
-from .. import defaults
-from . import information_schema as info
-from . import options, utils
+from types import ModuleType
 
-print(defaults)
+# print(__name__, defaults)
+import information_schema
 
-STORAGE = defaults.get_namespace("STORAGE_", lowercase=1)
+from . import options, peewee, peewee_adv, utils  # , const,
 
-print(STORAGE)
+STORAGE = information_schema.to_object("STORAGE_", lowercase=1)
+information_schema["ENGINES"] = ENGINES = information_schema.to_dict("STORAGE_DRIVER_")
 
-if STORAGE.driver == STORAGE.driver_peewee:
-    from . import peewee as engine
+print("ENGINES ==", ENGINES)
+print("STORAGE", STORAGE)
 
-if STORAGE.driver == STORAGE.driver_peewee_async:
-    from . import peewee as engine
+engine = ModuleType(__name__ + ".engine")
+info = {}
 
-__all__ = ("info", "engine")
+
+def get_engine(kind=STORAGE.driver) -> ModuleType:
+    #
+
+    if kind == STORAGE.driver_sqlite:
+        ENGINES["default"] = ENGINES["SQLITE"]
+        engine = peewee
+
+    if kind == STORAGE.driver_sqlite_advanced:
+        ENGINES["default"] = ENGINES["SQLITE_ADVANCED"]
+        engine = peewee_adv
+
+    return engine
+
+
+engine = get_engine()
+
+
+__all__ = ("info", "engine", "get_engine", "ENGINES")

@@ -15,10 +15,9 @@ from . import const, flask, flask_async
 HTTP = information_schema.to_object("HTTP_", lowercase=1)
 HTTP.CONST = const
 
+print("HTTP ==", HTTP, dir(information_schema))
 
 server = ModuleType(__name__ + ".server")
-
-# print('HTTP ==', HTTP)
 
 
 def get_server(kind=HTTP.driver) -> ModuleType:

@@ -2,7 +2,7 @@
 #
 # =============================================================================
 
-from base_model import BaseModel, DataBase
+from .base_model import BaseModel, Database
 
 
 def db(dbname: str) -> dict:

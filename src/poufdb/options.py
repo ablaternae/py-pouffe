@@ -55,5 +55,5 @@ STORAGE_DRIVER = STORAGE_DRIVER_SQLITE_ADVANCED
 
 hash = lambda x: sha(str(x).encode("utf-8")).hexdigest()
 hash10 = triphash = lambda x: hash(x)[:10]
-if not "tripcode" in globals():
+if not "tripcode" in (globals() + locals()):
     tripcode = hash10
