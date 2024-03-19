@@ -4,17 +4,27 @@
 
 
 from datetime import datetime
-from types import Any, Dict, List, Union
+from typing import Any, Dict, List, Union
 
-from playhouse.apsw_ext import (SQL, APSWDatabase, AutoField, BlobField,
-                                BooleanField, CharField, DateTimeField,
-                                FloatField, IntegerField, Model,
-                                PrimaryKeyField, TextField)
-from playhouse.fields import PickleField
+from playhouse.apsw_ext import (
+    SQL,
+    APSWDatabase,
+    AutoField,
+    BlobField,
+    BooleanField,
+    CharField,
+    DateTimeField,
+    FloatField,
+    IntegerField,
+    Model,
+    PrimaryKeyField,
+    TextField,
+)
 from playhouse.hybrid import hybrid_method, hybrid_property
 from playhouse.sqlite_ext import JSONField
+from playhouse.fields import PickleField
 
-from poufdb.options import tripcode as hash
+from ..options import tripcode as hash
 
 Database = APSWDatabase
 RealField = FloatField

@@ -7,8 +7,8 @@
 import sortedcontainers
 
 from .. import options
+from ..options import *
 
-# import hash, hash10, triphash
 
 Containers = sortedcontainers
 Collection = sortedcontainers.SortedDict

@@ -8,7 +8,7 @@ from types import ModuleType
 # print(__name__, defaults)
 import information_schema
 
-from . import options, peewee, peewee_adv, utils  # , const,
+from . import options, peewee, peewee_adv  # , utils  # , const,
 
 STORAGE = information_schema.to_object("STORAGE_", lowercase=1)
 information_schema['ENGINES'] = ENGINES = information_schema.to_dict("STORAGE_DRIVER_")
