@@ -6,20 +6,11 @@
 from datetime import datetime
 from types import Any, Dict, List, Union
 
-from playhouse.apsw_ext import (
-    SQL,
-    APSWDatabase,
-    AutoField,
-    BlobField,
-    BooleanField,
-    CharField,
-    DateTimeField,
-    FloatField,
-    IntegerField,
-    Model,
-    PrimaryKeyField,
-    TextField,
-)
+from playhouse.apsw_ext import (SQL, APSWDatabase, AutoField, BlobField,
+                                BooleanField, CharField, DateTimeField,
+                                FloatField, IntegerField, Model,
+                                PrimaryKeyField, TextField)
+from playhouse.fields import PickleField
 from playhouse.hybrid import hybrid_method, hybrid_property
 from playhouse.sqlite_ext import JSONField
 
@@ -56,9 +47,15 @@ class BaseModel(Model):
     _deleted = BooleanField(default=False)
     # – Deletion flag. Available if document was removed
 
-    _attachments = BlobField(null=True)
+    # _attachments = BlobField(null=True)
     # (object) – Attachment’s stubs. Available if document has any attachments
     # сделать ссылку на таблицу IntegerField(att_id) -> _attachments(id, blob)
+    # отдельная таблица с односторонним ключом (оттуда) по ид+ревизия
+    # отдельная таблица id, Array[doc_id], hash_att(unique index), blob (zipped blob?)
+
+    _data = PickleField(column_name="_data", index=False, null=True)
+    # добавленное поле
+    # проверить с типом JSONField
 
     _timestamp = FloatField(index=True, null=False, unique=False)
     # добавленное поле
