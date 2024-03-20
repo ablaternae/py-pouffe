@@ -19,6 +19,7 @@ from environs import Env
 
 env = Env()
 env.read_env(override=True)
+# https://github.com/theskumar/python-dotenv?tab=readme-ov-file#variable-expansion
 
 
 WORK_DIR = os.getcwd()
@@ -28,9 +29,9 @@ CRLF = os.linesep
 APP_ENV = env.str("APP_ENV", "dev")
 APP_DEBUG = env.bool("APP_DEBUG", False)
 
-HTTP_HOST = env.str("HTTP_HOST", "0.0.0.0")
-HTTP_HOST = env.str("HTTP_HOST", "127.0.59.84")
-HTTP_PORT = env.int("HTTP_PORT", 5984)
+# HTTP_HOST = env.str("HTTP_HOST", "0.0.0.0")
+HTTP_HOST = env.str("HTTP_HOST", "127.0.59.84") or "127.0.59.84"
+HTTP_PORT = env.int("HTTP_PORT", 5984) or 5984
 HTTP_SERVER_FLASK = "flask"
 HTTP_SERVER_FLASK_ASYNC = "flask_async"
 HTTP_SERVER_FASTAPI = "fastapi"
@@ -51,10 +52,14 @@ STORAGE_ENGINE_SQLITE = "sqlite"
 STORAGE_ENGINE_SQLITE_ASYNC = "sqlite_async"
 STORAGE_ENGINE_SQLITE_ADVANCED = "sqlite_adv"
 
-STORAGE_ENGINE_DEFAULT = env.str("STORAGE_ENGINE", STORAGE_ENGINE_SQLITE_ADVANCED)
+STORAGE_ENGINE_DEFAULT = env.str(
+    "STORAGE_ENGINE", STORAGE_ENGINE_SQLITE_ADVANCED
+)
 
 
 hash = lambda x: sha(str(x).encode("utf-8")).hexdigest()
 hash10 = triphash = lambda x: hash(x)[:10]
 if not ("tripcode" in globals() or "tripcode" in locals()):
     tripcode = hash10
+
+# print("ttttt", HTTP_HOST, APP_ENV)
