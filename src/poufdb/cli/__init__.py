@@ -10,7 +10,7 @@ import click
 
 from .. import options
 from ..__about__ import *
-from ..http import server
+from ..http import get_server, server
 
 
 @click.group(
@@ -98,6 +98,7 @@ def main(
         print("Id", __id__)
 
         try:
+            server = get_server()
             proc = Process(
                 target=server.start,
                 name="process_http_server",
@@ -107,6 +108,8 @@ def main(
             proc.join()
         except KeyboardInterrupt as exc:
             print("Keyboard Interrupt detected")
+        except ImportError as exc:
+            print("HTTP Backend is missing!", str(exc))
 
         print("Server stop")
 
