@@ -29,13 +29,15 @@ Options:
 ```
 
 ## документация
-* 
+
+* https://pouchdb.com/api.html
+* https://docs.couchdb.org/en/stable/api/index.html
 
 ## todolist & history
 
 * [ ] список документов
 * [ ] вопрос сковозного ID
-* [ ] коллекции: список, создание, удаление
+* [ ] v0.2.6 коллекции\базы данных: список, создание, удаление
 * [x] v0.2.5 `class InformationSchema(ModuleType)` универсальный конфиг `import information_schema`
 * [x] консольные команды
 * древняя история
