@@ -23,7 +23,7 @@ server = ModuleType(__name__ + ".server")
 def get_server(kind: str = None) -> ModuleType:
     """
 
-    :param kind: kind of http server, defaults to information_schema["HTTP_SERVERS"]
+    :param kind: kind of http server, defaults in information_schema["HTTP_SERVERS"]
     :type kind: str, optional
     :return: ModuleType
     :raise: ImportError

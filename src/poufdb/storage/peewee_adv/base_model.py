@@ -20,9 +20,9 @@ from playhouse.apsw_ext import (
     PrimaryKeyField,
     TextField,
 )
+from playhouse.fields import PickleField
 from playhouse.hybrid import hybrid_method, hybrid_property
 from playhouse.sqlite_ext import JSONField
-from playhouse.fields import PickleField
 
 from ..options import tripcode as hash
 
@@ -32,7 +32,7 @@ RealField = FloatField
 
 class BaseModel(Model):
     """
-    Response JSON Object:
+    JSON Object:
 
     _id (string) – Document ID
     _rev (string) – Revision MVCC token
@@ -63,7 +63,7 @@ class BaseModel(Model):
     # отдельная таблица с односторонним ключом (оттуда) по ид+ревизия
     # отдельная таблица id, Array[doc_id], hash_att(unique index), blob (zipped blob?)
 
-    _data = PickleField(column_name="_data", index=False, null=True)
+    _data = PickleField(column_name="_data", index=False, null=True, unique=False)
     # добавленное поле
     # проверить с типом JSONField
 

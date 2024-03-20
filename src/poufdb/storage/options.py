@@ -9,7 +9,6 @@ import sortedcontainers
 from .. import options
 from ..options import *
 
-
 Containers = sortedcontainers
 Collection = sortedcontainers.SortedDict
 
