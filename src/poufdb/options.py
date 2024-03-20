@@ -28,13 +28,14 @@ CRLF = os.linesep
 APP_ENV = env.str("APP_ENV", "dev")
 APP_DEBUG = env.bool("APP_DEBUG", False)
 
-HTTP_HOST = env.str("HTTP_HOST", "127.0.0.1")
 HTTP_HOST = env.str("HTTP_HOST", "0.0.0.0")
+HTTP_HOST = env.str("HTTP_HOST", "127.0.59.84")
 HTTP_PORT = env.int("HTTP_PORT", 5984)
-HTTP_DRIVER_FLASK = "flask"
-HTTP_DRIVER_FLASK_ASYNC = "flask_async"
-HTTP_DRIVER_FASTAPI = "fastapi"
-HTTP_DRIVER = HTTP_DRIVER_FLASK_ASYNC
+HTTP_SERVER_FLASK = "flask"
+HTTP_SERVER_FLASK_ASYNC = "flask_async"
+HTTP_SERVER_FASTAPI = "fastapi"
+
+HTTP_SERVER_DEFAULT = env.str("HTTP_SERVER", HTTP_SERVER_FLASK_ASYNC)
 
 # HTTP_URL = env.str("HTTP_URL", "")
 
@@ -46,11 +47,13 @@ HTTP_ADMIN_URL = ""
 STORAGE_DATA_DIR = os.path.realpath(
     env.str("DATA_DIR", os.path.join(WORK_DIR, "_data"))
 )
-STORAGE_DRIVER_SQLITE = "sqlite"
-STORAGE_DRIVER_SQLITE_ASYNC = "sqlite_async"
-STORAGE_DRIVER_SQLITE_ADVANCED = "sqlite_adv"
+STORAGE_ENGINE_SQLITE = "sqlite"
+STORAGE_ENGINE_SQLITE_ASYNC = "sqlite_async"
+STORAGE_ENGINE_SQLITE_ADVANCED = "sqlite_adv"
 
-STORAGE_DRIVER = STORAGE_DRIVER_SQLITE_ADVANCED
+STORAGE_ENGINE_DEFAULT = env.str(
+    "STORAGE_ENGINE", STORAGE_ENGINE_SQLITE_ADVANCED
+)
 
 
 hash = lambda x: sha(str(x).encode("utf-8")).hexdigest()
