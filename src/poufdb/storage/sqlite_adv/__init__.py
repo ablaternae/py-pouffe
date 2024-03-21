@@ -2,6 +2,6 @@
 #
 # =============================================================================
 
-from .base_model import BaseModel, Database, Model
+from .base_model import BaseModel, Database, Model, database
 
-__all__ = ("Database", "Model", "BaseModel")
+__all__ = ("BaseModel", "Database", "Model", "database")

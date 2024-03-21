@@ -71,6 +71,22 @@ def get_db_list(data_dir: str = None) -> Iterable:
 print("get_db_list", get_db_list())
 
 
+def dbname_normalize(dbname: str):
+    return make_snake_case(dbname)
+
+
+def get_db_connect(dbname: str):
+    dbname = make_snake_case(dbname)
+    dbfile = os.path.join(DATABASE_DIRECTORY, dbname + DATABASE_EXTENSION)
+    print(dbfile)
+
+    # db = engine.Database(None)
+    db = engine.database
+    db.init(dbfile)
+    db.connect(reuse_if_open=True)
+    return db
+
+
 __all__ = (
     "hash",
     "tripcode",
