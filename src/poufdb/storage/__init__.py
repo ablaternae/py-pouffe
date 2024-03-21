@@ -7,16 +7,11 @@ from types import ModuleType
 
 import information_schema
 
-from . import options, peewee, peewee_adv  # , utils  # , const,
+from . import options, sqlite_adv  # , utils  # , const,
 
 
 STORAGE = information_schema.to_object("STORAGE_", lowercase=1)
-ENGINES = information_schema["ENGINES"] = information_schema.to_dict(
-    "STORAGE_ENGINE_"
-)
-
-print("ENGINES ==", ENGINES)
-print("STORAGE", STORAGE)
+ENGINES = information_schema["ENGINES"] = information_schema.to_dict("STORAGE_ENGINE_")
 
 engine = ModuleType(__name__ + ".engine")
 info = {}

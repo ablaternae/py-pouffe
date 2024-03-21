@@ -81,7 +81,7 @@ def main(
         # options.STORAGE_DATA_DIR = data_dir
         if not os.path.isdir(data_dir):
             try:
-                os.mkdir(data_dir, 0o755)
+                os.makedirs(data_dir, 0o755)
                 print(f"Creating directory `{data_dir}`... Ok")
             except:
                 print(f"Creating directory `{data_dir}`... ERROR")
@@ -107,8 +107,10 @@ def main(
             proc.start()
             proc.join()
         except KeyboardInterrupt as exc:
+            # ^C pressed
             print("Keyboard Interrupt detected")
         except ImportError as exc:
+            # raise in get_server()
             print("HTTP Backend is missing!", str(exc))
 
         print("Server stop")

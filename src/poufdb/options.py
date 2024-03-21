@@ -52,14 +52,13 @@ STORAGE_ENGINE_SQLITE = "sqlite"
 STORAGE_ENGINE_SQLITE_ASYNC = "sqlite_async"
 STORAGE_ENGINE_SQLITE_ADVANCED = "sqlite_adv"
 
-STORAGE_ENGINE_DEFAULT = env.str(
-    "STORAGE_ENGINE", STORAGE_ENGINE_SQLITE_ADVANCED
-)
+STORAGE_ENGINE_DEFAULT = env.str("STORAGE_ENGINE", STORAGE_ENGINE_SQLITE_ADVANCED)
 
+STORAGE_JSON_AS_BLOB = "as_blob"
+STORAGE_JSON_AS_STRING = "as_string"
+STORAGE_JSON_DEFAULT = STORAGE_JSON_AS_BLOB
 
 hash = lambda x: sha(str(x).encode("utf-8")).hexdigest()
 hash10 = triphash = lambda x: hash(x)[:10]
 if not ("tripcode" in globals() or "tripcode" in locals()):
     tripcode = hash10
-
-# print("ttttt", HTTP_HOST, APP_ENV)

@@ -16,7 +16,6 @@ SERVERS = information_schema["HTTP_SERVERS"] = information_schema.to_dict(
     "HTTP_SERVER_", lowercase=0
 )
 
-print("HTTP ==", HTTP, dir(information_schema), SERVERS)
 server = ModuleType(__name__ + ".server")
 
 
