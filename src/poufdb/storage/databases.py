@@ -17,10 +17,19 @@ Collection = sortedcontainers.SortedDict
 Document = json
 
 
-class Databases(ModuleType):
+class Database(ModuleType):
     """Databases (docs collections) List."""
 
-    _collection: Collection = []
+    _collection: Collection = Collection()
+
+    def __init__(self, *args, **kwargs):
+        print(" this is INIT")
+        super().__init__(*args, **kwargs)
+
+    def __call__(self, *args, **kwargs):
+        raise TypeError(
+            "`databases` module is not callable. Use class `Database( name: str )` instead"
+        )
 
     def __repr__(self) -> str:
         import pprint
@@ -57,7 +66,7 @@ class Databases(ModuleType):
     pass
 
 
-sys.modules[__name__].__class__ = Databases
+sys.modules[__name__].__class__ = Database
 
 
 __all__ = ()
