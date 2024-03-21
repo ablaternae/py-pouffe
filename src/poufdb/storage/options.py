@@ -5,6 +5,7 @@
 # from hashlib import sha256
 
 import sortedcontainers
+
 import information_schema
 
 from ..options import hash, tripcode
@@ -23,3 +24,7 @@ SQLITE_PRAGMAS = (
 
 DATABASE_EXTENSION = ".db"
 DATABASE_DIRECTORY = information_schema["STORAGE_DATA_DIR"]
+
+
+STORAGE = information_schema.to_object("STORAGE_", lowercase=1)
+ENGINES = information_schema["ENGINES"] = information_schema.to_dict("STORAGE_ENGINE_")

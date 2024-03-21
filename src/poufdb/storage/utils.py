@@ -3,18 +3,14 @@
 # =============================================================================
 
 
-from ..options import hash, tripcode
-from .options import DATABASE_DIRECTORY, DATABASE_EXTENSION
 import os
+from types import ModuleType
+from typing import Any, Callable, Iterable, List, Mapping
+
 import information_schema
 
-import sortedcontainers
-from typing import Any, Callable, Iterable, Mapping, List
-
-Containers = sortedcontainers
-Collection = sortedcontainers.SortedList
-Document = sortedcontainers.SortedDict
-
+from ..options import hash, tripcode
+from .options import DATABASE_DIRECTORY, DATABASE_EXTENSION, ENGINES, STORAGE
 
 try:
     from setuptools.extern.jaraco.text import WordSet
@@ -34,6 +30,32 @@ except ImportError:
         return re.sub(r"\w+", lambda m: m.group(0).capitalize(), s)
 
 
+engine = ModuleType(__name__ + ".engine")
+
+
+def get_engine(kind: str = None) -> ModuleType:
+    """
+
+    :param kind: kind of DB storage engines, defaults in information_schema["STORAGE_ENGINES"]
+    :type kind: str, optional
+    :return: ModuleType
+    :raise: ImportError
+
+    """
+    if kind is None:
+        if "DEFAULT" in ENGINES:
+            kind = ENGINES["DEFAULT"]
+
+    from importlib import import_module
+
+    engine = import_module(".." + kind, __name__)
+
+    return engine
+
+
+engine = get_engine()
+
+
 def get_db_list(data_dir: str = None) -> Iterable:
     if not data_dir or not os.path.isdir(data_dir):
         data_dir = DATABASE_DIRECTORY
@@ -41,13 +63,12 @@ def get_db_list(data_dir: str = None) -> Iterable:
     ret = (
         f
         for f in os.scandir(data_dir)
-        if f.is_file(follow_symlinks=False)
-        and str(f).endswith(DATABASE_EXTENSION)
+        if f.is_file(follow_symlinks=False) and str(f).endswith(DATABASE_EXTENSION)
     )
     print(ret)
 
 
-get_db_list()
+print("get_db_list", get_db_list())
 
 
 __all__ = (

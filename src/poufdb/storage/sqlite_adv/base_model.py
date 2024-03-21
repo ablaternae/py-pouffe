@@ -6,11 +6,11 @@
 from datetime import datetime
 from typing import Any, Dict, List, Union
 
+import ujson as json
 from playhouse.apsw_ext import (
     SQL,
-    # APSWDatabase,
+    APSWDatabase,
     AutoField,
-    BlobField,
     BooleanField,
     CharField,
     DateTimeField,
@@ -24,12 +24,9 @@ from playhouse.fields import PickleField
 from playhouse.hybrid import hybrid_method, hybrid_property
 from playhouse.sqlite_ext import JSONField
 
-import ujson as json
-
 from ..options import tripcode as hash
 
-from .database import Database
-
+Database = APSWDatabase
 RealField = FloatField
 database = Database(None)
 
@@ -67,9 +64,7 @@ class BaseModel(Model):
     # отдельная таблица с односторонним ключом (оттуда) по ид+ревизия
     # отдельная таблица id, Array[doc_id], hash_att(unique index), blob (zipped blob?)
 
-    _data = PickleField(
-        column_name="_data", index=False, null=True, unique=False
-    )
+    _data = PickleField(column_name="_data", index=False, null=True, unique=False)
     # добавленное поле
     # проверить с типом JSONField
 

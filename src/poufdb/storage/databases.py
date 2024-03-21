@@ -5,12 +5,13 @@
 
 import sys
 from types import ModuleType
-from typing import Any, Callable, Iterable, Mapping
-from .options import tripcode as hash, SQLITE_PRAGMAS
-import ujson as json
+from typing import Any, Callable, Iterable, List, Mapping
 
 import sortedcontainers
-from typing import Any, Callable, Iterable, Mapping, List
+import ujson as json
+
+from .options import SQLITE_PRAGMAS
+from .options import tripcode as hash
 
 Containers = sortedcontainers
 Collection = sortedcontainers.SortedDict
@@ -23,7 +24,6 @@ class Database(ModuleType):
     _collection: Collection = Collection()
 
     def __init__(self, *args, **kwargs):
-        print(" this is INIT")
         super().__init__(*args, **kwargs)
 
     def __call__(self, *args, **kwargs):
@@ -35,9 +35,7 @@ class Database(ModuleType):
         import pprint
 
         return (
-            "<module Pouf.Databases: "
-            + pprint.pformat(self.__dir__(), indent=2)
-            + ">"
+            "<module Pouf.Databases: " + pprint.pformat(self.__dir__(), indent=2) + ">"
         )
         # return "Databases [" + ", ".join([f"'{d}'" for d in dir(self)]) + "]"
 
@@ -45,9 +43,7 @@ class Database(ModuleType):
         return list(
             filter(
                 lambda k: not isinstance(self[k], (Callable, ModuleType)),
-                filter(
-                    lambda k: not k.startswith("__"), self._collection.keys()
-                ),
+                filter(lambda k: not k.startswith("__"), self._collection.keys()),
             )
         )
 

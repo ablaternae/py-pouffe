@@ -11,12 +11,10 @@ Created on Wed Mar 20 19:01:41 2024
 
 
 from datetime import datetime
-from typing import Any, Dict, List, Union
 from types import ModuleType, SimpleNamespace
-from typing import Any, Callable, Iterable, Mapping
+from typing import Any, Callable, Dict, Iterable, List, Mapping, Union
 
 import ujson as json
-
 from playhouse.apsw_ext import (
     SQL,
     APSWDatabase,
@@ -35,7 +33,8 @@ from playhouse.fields import PickleField
 from playhouse.hybrid import hybrid_method, hybrid_property
 from playhouse.sqlite_ext import JSONField
 
-from ..options import tripcode as hash, SQLITE_PRAGMAS
+from ..options import SQLITE_PRAGMAS
+from ..options import tripcode as hash
 
 RealField = FloatField
 
