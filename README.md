@@ -32,12 +32,19 @@ Options:
 
 * https://pouchdb.com/api.html
 * https://docs.couchdb.org/en/stable/api/index.html
+* https://docs.couchdb.org/en/stable/api/database/common.html
+* https://docs.peewee-orm.com/en/latest/peewee/database.html
+* https://docs.peewee-orm.com/en/latest/peewee/models.html
+* https://docs.peewee-orm.com/en/latest/peewee/playhouse.html#Introspector
 
 ## todolist & history
 
+* [ ] сделать примеры с генерацией данных
+* [ ] три варианта API: классы (методы, иерархия), управляющие константы, вспомогательная information_schema
 * [ ] список документов
-* [ ] вопрос сковозного ID
-* [ ] v0.2.7 коллекции\базы данных: список, создание, удаление
+* [+] в процессе v0.2.7 автосоздание моделей документов из `class BaseModel(pw.Model)`, базовая модель находится в Storage.Engine
+* [ ] ~~вопрос сковозного ID~~
+* [-] в процессе v0.2.7 коллекция баз данных: список, создание, удаление. синглтон находится в storage.databases
 * [x] v0.2.6 engines, aka storage backends
 * [x] v0.2.5 `class InformationSchema(ModuleType)` универсальный конфиг `import information_schema`
 * [x] консольные команды

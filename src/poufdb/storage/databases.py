@@ -13,8 +13,9 @@ import ujson as json
 from .options import SQLITE_PRAGMAS
 
 Containers = sortedcontainers
-Collection = sortedcontainers.SortedDict
+Collection = sortedcontainers.SortedList
 Document = json
+Register = sortedcontainers.SortedDict
 
 from .utils import dbname_normalize, get_db_connect
 
@@ -22,7 +23,7 @@ from .utils import dbname_normalize, get_db_connect
 class Database(ModuleType):
     """Databases (docs collections) List."""
 
-    _collection: Collection = Collection()
+    _register: Register = Register()
     _current_db: str = None
 
     def __init__(self, *args, **kwargs):
@@ -33,8 +34,8 @@ class Database(ModuleType):
         # if not dbname in self:
         self[self._current_db] = get_db_connect(self._current_db)
 
-        print(self._collection.keys())
-        print(self._current_db in self._collection.keys())
+        print(self._register.keys())
+        print(self._current_db in self._register.keys())
 
         ...
 
@@ -52,19 +53,38 @@ class Database(ModuleType):
         # return "Databases [" + ", ".join([f"'{d}'" for d in dir(self)]) + "]"
 
     def __dir__(self) -> list:
-        return list(self._collection)
+        return list(self._register)
 
     def __getitem__(self, name: str) -> Any:
-        return self._collection[str(name)] if str(name) in self._collection else None
+        return self._register[str(name)] if str(name) in self._register else None
 
     def __setitem__(self, name: str, value: Any = None) -> Any:
-        return self._collection.setdefault(str(name), value)
+        return self._register.setdefault(str(name), value)
 
     # https://docs.peewee-orm.com/en/latest/peewee/database.html#setting-the-database-at-run-time
 
     @classmethod
     def create(cls, dbname: str):
-        return cls().init(dbname, pragmas=SQLITE_PRAGMAS)
+        """create or open dbname"""
+        return cls().__init__(dbname, pragmas=SQLITE_PRAGMAS)
+
+    @classmethod
+    def read(cls, dbname: str):
+        """read info about dbname"""
+        return cls()
+
+    @classmethod
+    def update(cls, dbname: str):
+        """ update WHAT ?"""
+        return cls()
+
+    @classmethod
+    def delete(cls, dbname: str):
+        """
+        remove db-file to %data_dir%/_backups/dbname-%Y-%M-%d-%m-%i
+        if isset STORAGE_DELETE_BACKUPS
+        """
+        return True
 
     pass
 
