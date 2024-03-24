@@ -16,5 +16,5 @@ Feature: welcome to the jungle
 				}
 				"""
 			And the response json at $.poufdb contains "PoufDB"
-			And the response json at $.vendor contains "poufdb"
+			And the response json at $.vendor contains "pouffe"
 
