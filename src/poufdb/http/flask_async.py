@@ -36,23 +36,79 @@ Etag − This header is used to show the revision for a document, or a view.
 """
 
 
+import gzip
 import sys
+from typing import Any, Dict, Iterable, List, Union
 
-from flask import Flask
+from flask import Flask, Response, abort, make_response, request, session
 
 from ..__about__ import *
-
-# from .. import config
-# from .const import HTTP
-
+from . import const
 
 app = Flask(__name__)
 # app.debug = True не работает, при перезагрузке падает процесс EOFError: Ran out of input
 
 
-@app.route("/")
+async def response(
+    content: Union[str, dict, list], status=None, headers=None
+) -> Response:
+    if not status:
+        status = const.status.OK
+    if not headers:
+        headers = {}
+
+    resp = make_response(content, status, headers)
+
+    if isinstance(content, (List, Dict, Iterable)):
+        resp.content_type = const.CONTENT_JSON
+    elif isinstance(content, str):
+        resp.content_type = const.CONTENT_HTML
+    else:
+        abort(500, "Unknown content")
+    return resp
+
+
+@app.before_request
+async def event_before() -> None:
+    ...
+    pass
+
+
+# @app.after_request
+async def event_after_latest(response: Response) -> Response:
+
+    # https://stackoverflow.com/questions/30165475/how-to-compress-minimize-size-of-json-jsonify-with-flask-in-python
+    accept_encoding = request.headers.get("Accept-Encoding", "")
+    print(accept_encoding, response.status_code)
+    response_data = response.get_data()
+    len_data = len(response_data)
+
+    if (
+        response.status_code < 200
+        or response.status_code > 299
+        or response.direct_passthrough
+        or len_data < const.MINIMUM_DEFLATE_SIZE
+        or "gzip" not in accept_encoding.lower()
+        or "Content-Encoding" in response.headers
+    ):
+        return response
+
+    content = gzip.compress(response_data, compresslevel=const.GZIP_COMPRESS_LEVEL)
+    response.set_data(content)
+    response.headers["Content-Encoding"] = "gzip"
+    response.headers["Content-Length"] = len(content)
+
+    return response
+
+
+@app.route("/", methods=["POST", "GET"])
 async def index():
-    return (
+
+    # @after_this_request
+    # def func(response: Response) -> Response:
+    #    return response
+
+    return await response(
         {
             # name(): "Welcome!",
             name(): summary(),

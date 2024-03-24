@@ -2,6 +2,9 @@
 #
 # =============================================================================
 
+
+from http import HTTPStatus as status
+
 DB_NOT_FOUND = {"error": "not_found", "reason": "Database does not exist."}
 
 DB_EXISTS = {
@@ -14,3 +17,12 @@ SUCCESS = {"ok": True}
 SESSION = {"ok": True, "userCtx": {"name": None, "roles": ["_admin"]}}
 
 TOO_MANY_UUIDS = {"error": "bad_request", "reason": "count parameter too large"}
+
+HEADER_JSON = {"Content-Type": "application/json"}
+
+CONTENT_HTML = "text/html"
+CONTENT_JSON = "application/json"
+
+MINIMUM_DEFLATE_SIZE = 2
+MINIMUM_DEFLATE_SIZE = 2048
+GZIP_COMPRESS_LEVEL = 6
