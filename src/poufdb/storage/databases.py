@@ -75,7 +75,7 @@ class Database(ModuleType):
 
     @classmethod
     def update(cls, dbname: str):
-        """ update WHAT ?"""
+        """update WHAT ?"""
         return cls()
 
     @classmethod

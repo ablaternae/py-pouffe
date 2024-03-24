@@ -201,7 +201,7 @@ class InformationSchema(ModuleType):
         if not isinstance(namespace, str):
             namespace = ""
 
-        return json.dumps(self.to_dict(namespace, lowercase, trim_namespace))
+        return json.dumps(self.to_dict(namespace, lowercase, trim_namespace), ident=2)
 
     def to_dict(
         self,

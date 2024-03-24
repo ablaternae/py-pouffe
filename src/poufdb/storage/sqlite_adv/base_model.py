@@ -26,8 +26,10 @@ from playhouse.sqlite_ext import JSONField
 
 from ..options import tripcode as hash
 
-Database = APSWDatabase
 RealField = FloatField
+
+
+Database = APSWDatabase
 database = Database(None)
 
 
@@ -128,4 +130,4 @@ class BaseModel(Model):
     pass
 
 
-__all__ = ("Database", "Model", "BaseModel")
+# __all__ = ("Database", "Model", "BaseModel")
