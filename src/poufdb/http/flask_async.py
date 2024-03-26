@@ -42,7 +42,9 @@ from typing import Any, Dict, Iterable, List, Union
 
 from flask import Flask, Response, abort, make_response, request, session
 
+from .. import storage
 from ..__about__ import *
+from ..storage import engine
 from . import const
 
 app = Flask(__name__)
@@ -69,17 +71,43 @@ async def response(
 
 
 @app.before_request
-async def event_before() -> None:
-    ...
-    pass
+async def event_before() -> None | Response:
+    print(
+        "before ==>",
+        # dir(request),
+        # dict(request.args),
+        request.path,
+        request.script_root,
+        request.url_root,
+    )
+
+    func = request.path.lower().replace("/", "")
+    print(func)
+
+    if not func.startswith("_"):
+        return
+
+    if hasattr(storage, func):
+        try:
+            resp = await response(
+                {**storage.func.__call__(**request.args), **const.SUCCESS}
+            )
+        except Exception as exc:
+            resp = await response(const.BAD_REQUEST, 500)
+
+    return
 
 
-# @app.after_request
+@app.after_request
 async def event_after_latest(response: Response) -> Response:
 
+    if request.method not in ("GET", "POST"):
+        return response
+
     # https://stackoverflow.com/questions/30165475/how-to-compress-minimize-size-of-json-jsonify-with-flask-in-python
-    accept_encoding = request.headers.get("Accept-Encoding", "")
-    print(accept_encoding, response.status_code)
+    # accept_encoding = request.headers.get("Accept-Encoding", "")
+    accept_encoding = request.accept_encodings
+    # print(accept_encoding, response.status_code)
     response_data = response.get_data()
     len_data = len(response_data)
 
@@ -120,14 +148,14 @@ async def index():
             "vendor": vendor(),
             # "author": author(),
         },
-        200,
+        const.status.OK,
     )
 
 
-@app.route("/_all_dbs")
-@app.route("/_session")
-@app.route("/_utils")  #   static / admin oanel
-@app.route("/_uuids")
+@app.route("/_all_dbs/")
+@app.route("/_session/")
+@app.route("/_utils/")  #   static / admin oanel
+@app.route("/_uuids/")
 async def no_answer():
     return {}, 501
 
@@ -146,7 +174,7 @@ async def no_answer():
 async def no_db(db=None):
     from ..storage import engine
 
-    print(engine.db.create())
+    # print(engine.db.create())
 
     return f"DB Error {str(db)}, 405 Method Not Allowed", 405
 

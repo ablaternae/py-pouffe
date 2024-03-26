@@ -2,7 +2,9 @@
 #
 # =============================================================================
 
+
 from .base_model import BaseModel, Database, Model, database
+from .utils import *
 
 
 class Document(BaseModel):

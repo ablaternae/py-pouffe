@@ -20,8 +20,8 @@ TOO_MANY_UUIDS = {"error": "bad_request", "reason": "count parameter too large"}
 
 HEADER_JSON = {"Content-Type": "application/json"}
 
-CONTENT_HTML = "text/html"
-CONTENT_JSON = "application/json"
+CONTENT_HTML = "text/html; charset=utf-8"
+CONTENT_JSON = "application/json; charset=utf-8"
 
 MINIMUM_DEFLATE_SIZE = 2
 MINIMUM_DEFLATE_SIZE = 2048

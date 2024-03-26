@@ -5,9 +5,9 @@
 
 import os
 
-# from hashlib import sha256 as sha
 # sha1 is faster than sha256 apprx 1/3 and just shorter
-from hashlib import sha1 as sha
+# from hashlib import sha1 as sha
+from hashlib import sha256 as sha
 
 try:
     from tripcode import tripcode

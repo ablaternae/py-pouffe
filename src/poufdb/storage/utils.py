@@ -55,18 +55,7 @@ def get_engine(kind: str = None) -> ModuleType:
 
 engine = get_engine()
 
-
-def get_db_list(data_dir: str = None) -> Iterable:
-    if not data_dir or not os.path.isdir(data_dir):
-        data_dir = DATABASE_DIRECTORY
-
-    ret = (
-        f
-        for f in os.scandir(data_dir)
-        if f.is_file(follow_symlinks=False) and str(f).endswith(DATABASE_EXTENSION)
-    )
-    print(ret)
-
+get_db_list = engine.get_db_list
 
 print("get_db_list", get_db_list())
 
