@@ -23,6 +23,10 @@ def after_all(context):
 
 
 def before_feature(context, feature):
+    if "skip" in feature.tags:
+        feature.skip("Marked with @skip")
+        return
+
     context.hooks.invoke(br_app.BEFORE_FEATURE, context, feature)
 
 
@@ -31,6 +35,10 @@ def after_feature(context, feature):
 
 
 def before_scenario(context, scenario):
+    if "skip" in scenario.effective_tags:
+        scenario.skip("Marked with @skip")
+        return
+
     context.hooks.invoke(br_app.BEFORE_SCENARIO, context, scenario)
 
 

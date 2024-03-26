@@ -1,10 +1,13 @@
 
-Feature: welcome to the jungle
-	As a anonymous client
-	Scenario: Первое подключение к серверу
+@skip
+Feature: https://github.com/behave-restful/behave-restful/issues/42
+	As authorized client
+	
+	@skip
+	Scenario: пропустить
 		Given a request url http://127.0.59.84:5984
-			#And request header "Accept-Encoding" "gzip, deflate, br"
 		When the request sends GET
+			And request header "Accept-Encoding" equal "gzip, deflate, br"
 
 		Then the response status is OK
 			And the response json matches
@@ -18,5 +21,5 @@ Feature: welcome to the jungle
 				}
 				"""
 			And the response json at $.poufdb contains "PoufDB"
-			And the response json at $.vendor contains "ablaternae"
+			And the response json at $.vendor contains "pouffe"
 
