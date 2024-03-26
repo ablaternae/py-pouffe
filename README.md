@@ -19,11 +19,8 @@ Usage: poufdb [OPTIONS] COMMAND [ARGS]...
 Options:
   -r, --start                     Server run
   -d, --data-dir PATH             Data directory, default `%current_dir%/_data`
-  -a, --admin-panel               Start discrete server for admin panel
-                                  (disable now)
-  --host TEXT                     Host, default `0.0.0.0`
+  --host TEXT                     Host, default `127.0.59.84`
   --port INTEGER                  Port, default `5984`
-  --engine [sqlite|inmemory|csv]  Backend engine (disable now)
   -v, --version                   Show the version and exit
   -h, --help                      Show this message and exit
 ```
@@ -40,6 +37,7 @@ Options:
 ## различия и особенности
 
 * PouchDB использует md5 в \_rev ревизиях документов, здесь по-умолчанию десятисимвольный хеш; надо добавить в настройки
+* В отличие от CouchDB почти везде в url применяются завершающие слеши 
 
 ## todolist & history
 
