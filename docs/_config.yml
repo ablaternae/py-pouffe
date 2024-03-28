@@ -1,14 +1,13 @@
 #
 # https://github.com/aterenin/minima-reboot/
 # remote_theme: aterenin/minima-reboot
-# https://github.com/olivier3lanc/Jekyll-LibDoc
-# remote_theme: olivier3lanc/Jekyll-LibDoc
+#
 # https://github.com/xriley/PrettyDocs-Theme
 # remote_theme: leakyabstractions/pretty-docs
 #
 
 
-remote_theme: olivier3lanc/Jekyll-LibDoc
+remote_theme: leakyabstractions/pretty-docs
 title: PoufDB
 name: name
 description: 
