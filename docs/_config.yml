@@ -5,9 +5,12 @@
 # https://github.com/xriley/PrettyDocs-Theme
 # remote_theme: leakyabstractions/pretty-docs
 #
+# https://github.com/sighingnow/jekyll-gitbook
+# remote_theme: sighingnow/jekyll-gitbook
+#
 
 
-remote_theme: leakyabstractions/pretty-docs
+remote_theme: sighingnow/jekyll-gitbook
 title: PoufDB
 name: name
 description: 
