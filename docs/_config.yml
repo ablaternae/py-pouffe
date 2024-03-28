@@ -2,23 +2,17 @@
 # https://github.com/aterenin/minima-reboot/
 # remote_theme: aterenin/minima-reboot
 #
-# https://github.com/sighingnow/jekyll-gitbook
-# remote_theme: sighingnow/jekyll-gitbook
+# https://github.com/alexander-heimbuch/millidocs
+# remote_theme: alexander-heimbuch/millidocs
 #
 
-plugins:
-  - jekyll-remote-theme
-remote_theme: labsyspharm/just-the-docs-lsp
-
+remote_theme: alexander-heimbuch/millidocs
 title: PoufDB
 name: name
 description: 
-#keep_files: [cache]
-#markdown: kramdown
+markdown: kramdown
 #markdown: redcarpet
 baseurl:
 github:
   repository_url: https://github.com/ablaternae/py-pouffe/
-collections:
-  guides:
-    output: true
+
