@@ -1,7 +1,20 @@
 #
 # https://github.com/aterenin/minima-reboot/
+# remote_theme: aterenin/minima-reboot
+#
+# https://github.com/olivier3lanc/Jekyll-LibDoc
+# remote_theme: olivier3lanc/Jekyll-LibDoc
 #
 
-
 remote_theme: aterenin/minima-reboot
-
+title: PoufDB
+description: 
+#keep_files: [cache]
+#markdown: kramdown
+markdown: redcarpet
+baseurl:
+github:
+  repository_url: https://github.com/ablaternae/py-pouffe/
+collections:
+  guides:
+    output: true
