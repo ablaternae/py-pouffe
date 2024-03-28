@@ -1,3 +1,9 @@
+---
+layout:
+title: Api
+navigation: 2
+---
+
 #  API
 
 В запросах следует ориентироваться на https://docs.couchdb.org/en/stable/api/basics.html
