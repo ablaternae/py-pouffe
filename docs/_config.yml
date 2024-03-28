@@ -1,3 +1,10 @@
+--
+title: Api
+navigation: 2
+--
+# layout: page
+# --
+
 #
 # https://github.com/aterenin/minima-reboot/
 # remote_theme: aterenin/minima-reboot
@@ -5,6 +12,7 @@
 # https://github.com/alexander-heimbuch/millidocs
 # remote_theme: alexander-heimbuch/millidocs
 #
+# remote_theme: just-the-docs/just-the-docs
 
 remote_theme: alexander-heimbuch/millidocs
 title: PoufDB
@@ -12,7 +20,8 @@ name: name
 description: 
 markdown: kramdown
 #markdown: redcarpet
-baseurl:
+baseurl: /py-pouffe
+url: https://github.com/ablaternae/py-pouffe
 github:
   repository_url: https://github.com/ablaternae/py-pouffe/
-
+search: false
