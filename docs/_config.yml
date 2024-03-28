@@ -6,14 +6,16 @@
 # remote_theme: sighingnow/jekyll-gitbook
 #
 
+plugins:
+  - jekyll-remote-theme
+remote_theme: labsyspharm/just-the-docs-lsp
 
-remote_theme: moonharelabs/styless
 title: PoufDB
 name: name
 description: 
 #keep_files: [cache]
 #markdown: kramdown
-markdown: redcarpet
+#markdown: redcarpet
 baseurl:
 github:
   repository_url: https://github.com/ablaternae/py-pouffe/
